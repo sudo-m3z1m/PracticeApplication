@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +28,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.colorResource
@@ -42,6 +45,7 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
     public val first_team: String = first_team
     public val second_team: String = second_team
     public val result: String = result
+    public val date: Int = date
 }
 
 class MainActivity : ComponentActivity() {
@@ -83,14 +87,24 @@ fun list_page_creating(items_list: Array<Match>)
             {
                 index ->
                     Surface(color = colorResource(id = R.color.teal_700),
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp).height(50.dp))
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                            .shadow(15.dp, shape = RoundedCornerShape(15.dp)),
+                        shape = RoundedCornerShape(15.dp))
                     {
-                        Row(verticalAlignment = Alignment.CenterVertically)
+                        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center)
                         {
-                            Text(text = items_list[index].first_team, modifier = Modifier.padding(horizontal = 10.dp))
-                            Text(text = items_list[index].second_team, modifier = Modifier.padding(horizontal = 10.dp))
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center)
+                            {
+                                Text(text = items_list[index].first_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
+                                Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp), fontSize = 25.sp)
+                                Text(text = items_list[index].second_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
+                            }
+                            Text(text = "Win result: ${items_list[index].result}", modifier = Modifier.padding(10.dp), fontSize = 20.sp)
+                            Text(text = "Match date: ${items_list[index].date}", modifier = Modifier.padding(5.dp), fontSize = 20.sp)
                         }
-                        Spacer(modifier = Modifier.height(20.dp))
                     }
             }
         }
