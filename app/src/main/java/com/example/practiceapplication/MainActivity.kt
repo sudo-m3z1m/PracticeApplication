@@ -69,7 +69,9 @@ fun ready_preview()
 {
     val test_match: Match = Match("Godoters", "Unity guys",
         "Godoters", 22)
-    var array: Array<Match> = arrayOf(test_match)
+    val another_test_match: Match = Match("Godoters", "Unity guys",
+        "Godoters", 22)
+    var array: Array<Match> = arrayOf(test_match, another_test_match)
     list_page_creating(array)
 }
 
@@ -89,7 +91,7 @@ fun list_page_creating(items_list: Array<Match>)
                     Surface(color = colorResource(id = R.color.teal_700),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 20.dp)
+                            .padding(horizontal = 20.dp, vertical = 10.dp)
                             .shadow(15.dp, shape = RoundedCornerShape(15.dp)),
                         shape = RoundedCornerShape(15.dp))
                     {
