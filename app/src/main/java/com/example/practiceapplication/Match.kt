@@ -35,7 +35,7 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
     private val date: Int = date
 
     @Composable
-    public fun generate_match_item()
+    public fun generate_match_item() //Need to make this in Item
     {
         Surface(color = colorResource(id = R.color.teal_700),
             modifier = Modifier
