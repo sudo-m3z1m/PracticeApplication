@@ -57,12 +57,8 @@ class MainActivity : ComponentActivity() {
             PracticeApplicationTheme {
                 Surface()
                 {
-                    val test_match: Match = Match("Godoters", "Unity guys",
-                        "Godoters", 22)
-                    val another_test_match: Match = Match("Godoters", "Unity guys",
-                        "Godoters", 22)
-                    var array: Array<Match> = arrayOf(test_match, another_test_match)
-                    list_page_creating(array)
+//                    var array: Array<Match> = arrayOf()
+//                    list_page_creating(array)
                 }
             }
         }
@@ -73,16 +69,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ready_preview()
 {
-    val test_match: Match = Match("Godoters", "Unity guys",
-        "Godoters", 22)
-    val another_test_match: Match = Match("Godoters", "Unity guys",
-        "Godoters", 22)
-    var array: Array<Match> = arrayOf(test_match, another_test_match)
+    val first_test_item: MatchItem = MatchItem(Match("Godoters", "Unity guys",
+        "Godoters", 23122024))
+    val second_test_item: MatchItem = MatchItem(Match("Godoters", "Unity guys",
+        "Godoters", 25122024))
+    var array: Array<MatchItem> = arrayOf(first_test_item, second_test_item)
     list_page_creating(array)
 }
 
 @Composable
-fun list_page_creating(items_list: Array<Match>)
+fun list_page_creating(items_list: Array<MatchItem>)
 {
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally)
     {
