@@ -41,7 +41,7 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 10.dp)
-                .shadow(15.dp, shape = RoundedCornerShape(15.dp)),
+                .shadow(5.dp, shape = RoundedCornerShape(15.dp)),
             shape = RoundedCornerShape(15.dp),
             onClick = { surface_on_click() })
         {
@@ -51,7 +51,11 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center)
                 {
                     Text(text = first_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
+<<<<<<< HEAD
                     Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp, vertical = 20.dp), fontSize = 25.sp)
+=======
+                    Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp, vertical = 40.dp), fontSize = 25.sp)
+>>>>>>> 076dfb32ba40bfa8194d6beffc0206ea2869dfa2
                     Text(text = second_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
                 }
             }
