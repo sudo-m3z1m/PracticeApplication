@@ -1,8 +1,10 @@
 package com.example.practiceapplication
 
 import android.content.ClipData.Item
+import android.content.Context
 import android.os.Bundle
 import android.widget.Space
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -39,15 +41,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.practiceapplication.ui.theme.PracticeApplicationTheme
 
-class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
-            result: String = "DEFAULT", date: Int = 0)
-{
-    public val first_team: String = first_team
-    public val second_team: String = second_team
-    public val result: String = result
-    public val date: Int = date
-}
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +49,12 @@ class MainActivity : ComponentActivity() {
             PracticeApplicationTheme {
                 Surface()
                 {
-//                    list_page_creating(generate_matches())
+                    val test_match: Match = Match("Godoters", "Unity guys",
+                        "Godoters", 22)
+                    val another_test_match: Match = Match("Godoters", "Unity guys",
+                        "Godoters", 22)
+                    var array: Array<Match> = arrayOf(test_match, another_test_match)
+                    list_page_creating(array)
                 }
             }
         }
@@ -88,26 +86,7 @@ fun list_page_creating(items_list: Array<Match>)
             items(items_list.size)
             {
                 index ->
-                    Surface(color = colorResource(id = R.color.teal_700),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 20.dp, vertical = 10.dp)
-                            .shadow(15.dp, shape = RoundedCornerShape(15.dp)),
-                        shape = RoundedCornerShape(15.dp))
-                    {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.Center)
-                        {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center)
-                            {
-                                Text(text = items_list[index].first_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
-                                Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp), fontSize = 25.sp)
-                                Text(text = items_list[index].second_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
-                            }
-                            Text(text = "Win result: ${items_list[index].result}", modifier = Modifier.padding(10.dp), fontSize = 20.sp)
-                            Text(text = "Match date: ${items_list[index].date}", modifier = Modifier.padding(5.dp), fontSize = 20.sp)
-                        }
-                    }
+                    items_list[index].generate_match_item()
             }
         }
     }
