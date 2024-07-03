@@ -33,7 +33,7 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 10.dp)
-                .shadow(15.dp, shape = RoundedCornerShape(15.dp)),
+                .shadow(5.dp, shape = RoundedCornerShape(15.dp)),
             shape = RoundedCornerShape(15.dp),
             onClick = {})
         {
@@ -43,11 +43,9 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center)
                 {
                     Text(text = first_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
-                    Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp), fontSize = 25.sp)
+                    Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp, vertical = 40.dp), fontSize = 25.sp)
                     Text(text = second_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
                 }
-                Text(text = "Win result: $result", modifier = Modifier.padding(10.dp), fontSize = 20.sp)
-                Text(text = "Match date: $date", modifier = Modifier.padding(5.dp), fontSize = 20.sp)
             }
         }
     }
