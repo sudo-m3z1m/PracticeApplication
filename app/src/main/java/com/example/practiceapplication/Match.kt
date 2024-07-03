@@ -1,5 +1,8 @@
 package com.example.practiceapplication
 
+import android.app.Activity
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,9 +10,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -35,7 +43,7 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
                 .padding(horizontal = 20.dp, vertical = 10.dp)
                 .shadow(15.dp, shape = RoundedCornerShape(15.dp)),
             shape = RoundedCornerShape(15.dp),
-            onClick = {})
+            onClick = { surface_on_click() })
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center)
@@ -43,12 +51,15 @@ class Match(first_team: String = "DEFAULT", second_team: String = "DEFAULT",
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center)
                 {
                     Text(text = first_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
-                    Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp), fontSize = 25.sp)
+                    Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp, vertical = 20.dp), fontSize = 25.sp)
                     Text(text = second_team, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
                 }
-                Text(text = "Win result: $result", modifier = Modifier.padding(10.dp), fontSize = 20.sp)
-                Text(text = "Match date: $date", modifier = Modifier.padding(5.dp), fontSize = 20.sp)
             }
         }
+    }
+
+    fun surface_on_click()
+    {
+        Log.i("Hello world", "Fuck")
     }
 }
