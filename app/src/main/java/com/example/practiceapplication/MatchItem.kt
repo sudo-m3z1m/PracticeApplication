@@ -46,11 +46,3 @@ class MatchItem(match: Match = Match())
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun preview()
-{
-    val match_item: MatchItem = MatchItem()
-    match_item.generate_match_item()
-}
