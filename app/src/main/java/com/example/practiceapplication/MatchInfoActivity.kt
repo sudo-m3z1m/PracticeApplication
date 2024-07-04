@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -82,7 +84,7 @@ fun paste_match_info(match_id: Int = 0)
                 {
                     Image(painter = painterResource(id = R.drawable.ic_launcher_background),
                         contentDescription = stringResource(id = R.string.match))
-                    Text(text = "Second_default_team",
+                    Text(text = "Second_default_team", //Need to do smthg with this text
                         color = colorResource(id = R.color.white))
                 }
             }
@@ -104,7 +106,7 @@ fun paste_match_info(match_id: Int = 0)
                     fontSize = 20.sp,
                     color = colorResource(id = R.color.teal_200),
                     modifier = Modifier.padding(10.dp))
-                Spacer(modifier = Modifier.height(15.dp))
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 25.dp))
                 Text(text = stringResource(id = R.string.date),
                     fontSize = 35.sp,
                     color = colorResource(id = R.color.white),
