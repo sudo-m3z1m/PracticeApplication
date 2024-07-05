@@ -16,17 +16,10 @@
             android:name=".MatchInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:theme="@style/Theme.PracticeApplication" />
-        <activity
-            android:name=".MatchInformationActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PracticeApplication">
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

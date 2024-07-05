@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,22 +47,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidViewBinding
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentActivity
+import com.example.practiceapplication.databinding.FragmentListBinding
 import com.example.practiceapplication.ui.theme.PracticeApplicationTheme
 import kotlin.time.Duration
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            PracticeApplicationTheme {
-                Surface()
-                {
-//                    var array: Array<Match> = arrayOf()
-//                    list_page_creating(array)
-                }
-            }
-        }
+        val list_fragment: ListFragment = ListFragment()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_list, list_fragment).commit()
+
     }
 }
 
