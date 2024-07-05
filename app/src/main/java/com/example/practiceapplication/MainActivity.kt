@@ -11,6 +11,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -57,22 +58,7 @@ import kotlin.time.Duration
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        val list_fragment: ListFragment = ListFragment()
-        supportFragmentManager.beginTransaction().add(R.id.fragment_list, list_fragment).commit()
-
+        setContentView(R.layout.main_activity)
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_list, ListFragment()).commit()
     }
-}
-
-fun generate_matches(): Array<Match>
-{
-    var items_list: Array<Match> = emptyArray()
-    for (item_index in (1..5))
-    {
-        val item: Match = Match(first_team = "Godoters!", second_team = "UnityGuys",
-            result = "Godoters", date = item_index)
-        items_list[item_index] = item
-    }
-
-    return items_list
 }
