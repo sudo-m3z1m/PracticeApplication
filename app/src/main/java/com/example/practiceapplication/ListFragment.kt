@@ -25,9 +25,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.fragment.findNavController
 
-class ListFragment : Fragment() {
-
+class ListFragment : Fragment()
+{
     companion object {
         fun newInstance() = ListFragment()
     }
@@ -44,7 +45,8 @@ class ListFragment : Fragment() {
     ): View {
         val view: ComposeView = ComposeView(requireContext())
         view.apply {
-            setContent {
+            setContent()
+            {
                 list_page_creating()
             }
         }
@@ -76,7 +78,7 @@ class ListFragment : Fragment() {
                 .padding(horizontal = 20.dp, vertical = 10.dp)
                 .shadow(5.dp, shape = RoundedCornerShape(15.dp)),
             shape = RoundedCornerShape(15.dp),
-            onClick = {})
+            onClick = {findNavController().navigate(R.id.to_info_fragment)})
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center)
