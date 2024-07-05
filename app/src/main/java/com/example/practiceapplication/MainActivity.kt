@@ -65,35 +65,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ready_preview()
-{
-    val first_test_item: MatchItem = MatchItem(Match("Godoters", "Unity guys",
-        "Godoters", 23122024))
-    val second_test_item: MatchItem = MatchItem(Match("Godoters", "Unity guys",
-        "Godoters", 25122024))
-    var array: Array<MatchItem> = arrayOf(first_test_item, second_test_item)
-    list_page_creating(array)
-}
-
-@Composable
-fun list_page_creating(items_list: Array<MatchItem>)
-{
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally)
-    {
-        Text(text = "Matches", fontSize = 24.sp, modifier = Modifier.padding(30.dp))
-        LazyColumn(horizontalAlignment = Alignment.CenterHorizontally)
-        {
-            items(items_list.size)
-            {
-                index ->
-                    items_list[index].generate_match_item()
-            }
-        }
-    }
-}
-
 fun generate_matches(): Array<Match>
 {
     var items_list: Array<Match> = emptyArray()

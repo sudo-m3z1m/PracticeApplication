@@ -12,7 +12,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Surface
@@ -70,7 +73,8 @@ fun paste_match_info(match_id: Int = 0)
             Row(verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center)
             {
-                Column(horizontalAlignment = Alignment.CenterHorizontally)
+                Column(horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.height(120.dp).width(120.dp))
                 {
                     Image(painter = painterResource(id = R.drawable.ic_launcher_background),
                         contentDescription = stringResource(id = R.string.match))
@@ -80,7 +84,8 @@ fun paste_match_info(match_id: Int = 0)
                 Image(painter = painterResource(id = R.drawable.ic_launcher_foreground),
                     contentDescription = stringResource(id = R.string.match),
                     modifier = Modifier.padding(vertical = 30.dp))
-                Column(horizontalAlignment = Alignment.CenterHorizontally)
+                Column(horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.height(120.dp).width(120.dp))
                 {
                     Image(painter = painterResource(id = R.drawable.ic_launcher_background),
                         contentDescription = stringResource(id = R.string.match))
