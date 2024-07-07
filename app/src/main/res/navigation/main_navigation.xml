@@ -22,7 +22,7 @@
         android:label="fragment_match_info"
         tools:layout="@layout/fragment_match_info" >
         <action
-            android:id="@+id/action_matchInfoFragment_to_listFragment"
+            android:id="@+id/to_list_fragment"
             app:destination="@id/listFragment"
             app:enterAnim="@android:anim/slide_out_right" />
     </fragment>

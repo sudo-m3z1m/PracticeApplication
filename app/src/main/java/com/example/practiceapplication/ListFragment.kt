@@ -50,7 +50,7 @@ class ListFragment : Fragment()
                 list_page_creating()
             }
         }
-        return view //inflater.inflate(R.layout.fragment_list, container, false)
+        return view
     }
 
     @Composable
@@ -78,7 +78,7 @@ class ListFragment : Fragment()
                 .padding(horizontal = 20.dp, vertical = 10.dp)
                 .shadow(5.dp, shape = RoundedCornerShape(15.dp)),
             shape = RoundedCornerShape(15.dp),
-            onClick = {findNavController().navigate(R.id.to_info_fragment)})
+            onClick = {viewModel.on_list_clicked(match, findNavController())})
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center)

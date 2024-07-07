@@ -1,7 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+//    id("androidx.navigation.safeargs.kotlin")
 }
+
+//buildscript {
+//    repositories {
+//        google()
+//    }
+//    dependencies {
+//        val nav_version = "2.7.7"
+//        classpath(libs.androidx.navigation.navigation.safe.args.gradle.plugin)
+//    }
+//}
 
 android {
     namespace = "com.example.practiceapplication"
@@ -19,7 +30,6 @@ android {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -50,6 +60,11 @@ android {
     }
 }
 
+//repositories {
+//    google()
+//    mavenCentral()
+//}
+
 dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
@@ -78,6 +93,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+//    implementation(libs.navigation.safe.args.gradle.plugin)
+//    implementation(libs.kotlinx.coroutins.android)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
