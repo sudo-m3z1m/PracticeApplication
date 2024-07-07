@@ -17,6 +17,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -78,7 +82,7 @@ class ListFragment : Fragment()
                 .padding(horizontal = 20.dp, vertical = 10.dp)
                 .shadow(5.dp, shape = RoundedCornerShape(15.dp)),
             shape = RoundedCornerShape(15.dp),
-            onClick = {viewModel.on_list_clicked(match, findNavController())})
+            onClick = {viewModel.get_match_list()})
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center)

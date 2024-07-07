@@ -94,6 +94,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 //    implementation(libs.navigation.safe.args.gradle.plugin)
 //    implementation(libs.kotlinx.coroutins.android)
 
