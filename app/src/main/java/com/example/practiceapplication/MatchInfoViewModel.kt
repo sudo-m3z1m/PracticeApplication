@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 class MatchInfoViewModel : ViewModel() {
     var match: Match = Match()
 
-    fun set_match(new_match: Match)
+    fun set_new_match(match_index: Int)
     {
-        match = new_match
+        match = MatchesList.live_matches_list.value!!.get(match_index)
     }
 }

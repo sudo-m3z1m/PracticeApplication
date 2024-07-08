@@ -26,12 +26,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class Match(match_id: Int = 0, first_team: String = "DEFAULT", second_team: String = "DEFAULT",
-            result: String = "DEFAULT", date: Int = 0)
-{
-    public val match_id: Int = match_id
-    public val first_team: String = first_team
-    public val second_team: String = second_team
-    public val result: String = result
-    public val date: Int = date
-}
+data class Match(
+    val MatchNumber: Int = 0,
+    val RoundNumber: Int = 0,
+    val DateUtc: String = "00000000",
+    val Location: String = "default",
+    val HomeTeam: String = "default",
+    val AwayTeam: String = "default",
+    val HomeTeamScore: Int = 0,
+    val AwayTeamScore: Int = 0
+)
