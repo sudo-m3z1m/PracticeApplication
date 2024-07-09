@@ -9,6 +9,7 @@
     <string name="result">Results:</string>
     <string name="date">Date:</string>
     <string name="time">Time:</string>
+    <string name="location">Location:</string>
     <string name="winner">Winner</string>
 
     <string name="lorem_ipsum">

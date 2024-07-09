@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Space
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -135,9 +138,10 @@ class MatchInfoFragment : Fragment() {
                     fontSize = 35.sp,
                     color = colorResource(id = R.color.white),
                     modifier = Modifier.padding(5.dp))
-                Row()
+                Row(Modifier.background(color = colorResource(id = R.color.white),
+                    shape = RoundedCornerShape(10.dp)))
                 {
-                    Column()
+                    Column(horizontalAlignment = Alignment.CenterHorizontally)
                     {
                         Text(text = "${match.HomeTeam.toString()}:",
                             fontSize = 30.sp,
@@ -148,7 +152,8 @@ class MatchInfoFragment : Fragment() {
                             color = colorResource(id = R.color.teal_200),
                             modifier = Modifier.padding(10.dp))
                     }
-                    Column()
+                    Spacer(modifier = Modifier.width(100.dp))
+                    Column(horizontalAlignment = Alignment.CenterHorizontally)
                     {
                         Text(text = "${match.AwayTeam.toString()}:",
                             fontSize = 30.sp,
@@ -160,8 +165,14 @@ class MatchInfoFragment : Fragment() {
                             modifier = Modifier.padding(10.dp))
                     }
                 }
-                Text(text = stringResource(id = R.string.winner))
-                Text(text = winners_map[match.HomeTeamScore > match.AwayTeamScore].toString())
+                Text(text = stringResource(id = R.string.winner),
+                    fontSize = 30.sp,
+                    color = colorResource(id = R.color.winner_label),
+                    modifier = Modifier.padding(vertical = 5.dp))
+                Text(text = winners_map[match.HomeTeamScore > match.AwayTeamScore].toString(),
+                    fontSize = 25.sp,
+                    color = colorResource(id = R.color.winner),
+                    modifier = Modifier.padding(vertical = 5.dp))
             }
         }
     }
@@ -169,12 +180,22 @@ class MatchInfoFragment : Fragment() {
     @Composable
     fun paste_time_info(match: Match)
     {
-        Surface()
+        Surface(modifier = Modifier
+            .padding(15.dp), color = colorResource(id = R.color.teal_700))
         {
-            Column()
+            Column(horizontalAlignment = Alignment.CenterHorizontally)
             {
-                Text(text = stringResource(id = R.string.date))
-                Text(text = get_time(match))
+                Text(text = stringResource(id = R.string.date),
+                    fontSize = 35.sp,
+                    modifier = Modifier.padding(horizontal = 100.dp, vertical = 10.dp))
+                Text(text = get_time(match),
+                    fontSize = 20.sp)
+                HorizontalDivider(thickness = 2.dp,
+                    modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp))
+                Text(text = stringResource(id = R.string.location),
+                    fontSize = 35.sp)
+                Text(text = match.Location,
+                    fontSize = 20.sp)
             }
         }
     }
