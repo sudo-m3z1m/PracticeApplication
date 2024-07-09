@@ -21,6 +21,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -77,8 +78,8 @@ class ListFragment : Fragment()
             {
                 items(matches_list.value.size)
                 {
-                        index ->
-                        generate_match_item(matches_list.value.get(index))
+                    index ->
+                    generate_match_item(matches_list.value.get(index))
                 }
             }
         }

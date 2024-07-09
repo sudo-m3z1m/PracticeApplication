@@ -37,6 +37,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 class MatchInfoFragment : Fragment() {
     companion object {
@@ -138,30 +142,32 @@ class MatchInfoFragment : Fragment() {
                     fontSize = 35.sp,
                     color = colorResource(id = R.color.white),
                     modifier = Modifier.padding(5.dp))
-                Row(Modifier.background(color = colorResource(id = R.color.white),
-                    shape = RoundedCornerShape(10.dp)))
+                Row(horizontalArrangement = Arrangement.Center)
                 {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally)
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(horizontal = 10.dp))
                     {
                         Text(text = "${match.HomeTeam.toString()}:",
-                            fontSize = 30.sp,
-                            color = colorResource(id = R.color.teal_200),
-                            modifier = Modifier.padding(10.dp))
+                            fontSize = 25.sp,
+                            color = colorResource(id = R.color.white),
+                            modifier = Modifier.padding(10.dp),
+                            textAlign = TextAlign.Center)
                         Text(text = match.HomeTeamScore.toString(),
-                            fontSize = 30.sp,
-                            color = colorResource(id = R.color.teal_200),
+                            fontSize = 25.sp,
+                            color = colorResource(id = R.color.white),
                             modifier = Modifier.padding(10.dp))
                     }
-                    Spacer(modifier = Modifier.width(100.dp))
-                    Column(horizontalAlignment = Alignment.CenterHorizontally)
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(horizontal = 10.dp))
                     {
                         Text(text = "${match.AwayTeam.toString()}:",
-                            fontSize = 30.sp,
-                            color = colorResource(id = R.color.teal_200),
-                            modifier = Modifier.padding(10.dp))
+                            fontSize = 25.sp,
+                            color = colorResource(id = R.color.white),
+                            modifier = Modifier.padding(10.dp),
+                            textAlign = TextAlign.Center)
                         Text(text = match.AwayTeamScore.toString(),
-                            fontSize = 30.sp,
-                            color = colorResource(id = R.color.teal_200),
+                            fontSize = 25.sp,
+                            color = colorResource(id = R.color.white),
                             modifier = Modifier.padding(10.dp))
                     }
                 }
@@ -181,35 +187,44 @@ class MatchInfoFragment : Fragment() {
     fun paste_time_info(match: Match)
     {
         Surface(modifier = Modifier
-            .padding(15.dp), color = colorResource(id = R.color.teal_700))
+            .padding(15.dp), color = colorResource(id = R.color.teal_700),
+            shape = RoundedCornerShape(15.dp))
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally)
             {
                 Text(text = stringResource(id = R.string.date),
                     fontSize = 35.sp,
-                    modifier = Modifier.padding(horizontal = 100.dp, vertical = 10.dp))
+                    modifier = Modifier.padding(horizontal = 100.dp, vertical = 10.dp),
+                    color = colorResource(id = R.color.white))
                 Text(text = get_time(match),
-                    fontSize = 20.sp)
+                    fontSize = 20.sp,
+                    color = colorResource(id = R.color.white))
                 HorizontalDivider(thickness = 2.dp,
                     modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp))
                 Text(text = stringResource(id = R.string.location),
-                    fontSize = 35.sp)
+                    fontSize = 35.sp,
+                    color = colorResource(id = R.color.white))
                 Text(text = match.Location,
-                    fontSize = 20.sp)
+                    fontSize = 20.sp,
+                    color = colorResource(id = R.color.white),
+                    modifier = Modifier.padding(vertical = 10.dp))
             }
         }
     }
 
     fun get_time(match: Match): String
     {
-        return match.DateUtc
-    }
-}
+        val utc_date_format: String = "yyyy-MM-dd HH:mm:ss"
+        val new_date_format: String = "dd MMM yyyy HH:mm"
 
-@Preview(showBackground = true)
-@Composable
-fun test_preview()
-{
-    val fragment = MatchInfoFragment()
-    fragment.paste_match_info(match = Match())
+        var date_formater = SimpleDateFormat(utc_date_format, Locale.ENGLISH) //Need to make parse to Date in match btw
+        date_formater.timeZone = TimeZone.getTimeZone("UTC")
+        val utc_date: Date = date_formater.parse(match.DateUtc)
+
+        date_formater = SimpleDateFormat(new_date_format, Locale.ENGLISH)
+        date_formater.timeZone = TimeZone.getDefault()
+        val new_date: String = date_formater.format(utc_date)
+
+        return new_date
+    }
 }
