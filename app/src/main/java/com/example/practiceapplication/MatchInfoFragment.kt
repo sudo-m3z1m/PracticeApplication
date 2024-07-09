@@ -61,6 +61,7 @@ class MatchInfoFragment : Fragment() {
         }
         return view
     }
+    
     @Composable
     fun paste_match_info(match: Match)
     {
@@ -182,4 +183,12 @@ class MatchInfoFragment : Fragment() {
     {
         return match.DateUtc
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun test_preview()
+{
+    val fragment = MatchInfoFragment()
+    fragment.paste_match_info(match = Match())
 }
