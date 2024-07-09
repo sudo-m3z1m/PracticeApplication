@@ -1,5 +1,7 @@
 package com.example.practiceapplication
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
@@ -7,18 +9,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -73,7 +79,20 @@ class ListFragment : Fragment()
         val matches_list = MatchesList.live_matches_list.observeAsState(emptyList())
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally)
         {
-            Text(text = "Matches", fontSize = 24.sp, modifier = Modifier.padding(30.dp))
+            Row(horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp, vertical = 10.dp))
+            {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(text = "Matches", fontSize = 24.sp, modifier = Modifier.weight(1f))
+                IconButton(onClick = {create_dialog()})
+                {
+                    Image(painter = painterResource(id = R.drawable.ic_launcher_background),
+                        contentDescription = "SearchButton")
+                }
+            }
             LazyColumn(horizontalAlignment = Alignment.CenterHorizontally)
             {
                 items(matches_list.value.size)
@@ -106,5 +125,26 @@ class ListFragment : Fragment()
                 }
             }
         }
+    }
+
+    fun create_dialog()
+    {
+        val dialog_builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        val edit_text: EditText = EditText(requireContext())
+
+        dialog_builder.setTitle("Search")
+            .setMessage("Print team you want to search")
+            .setView(edit_text)
+            .setPositiveButton("Find", DialogInterface.OnClickListener()
+            {
+                dialogInterface, i ->
+                viewModel.get_searched_list(edit_text.text.toString())
+            })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener()
+            {
+                dialogInterface, i ->
+                viewModel.load_matches_list()
+            })
+        dialog_builder.create().show()
     }
 }

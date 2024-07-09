@@ -1,6 +1,10 @@
 package com.example.practiceapplication
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.util.Log
+import android.widget.EditText
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.fragment.app.Fragment
@@ -38,6 +42,17 @@ class ListViewModel : ViewModel() {
             val result = matches_api.get_matches()
             MatchesList.matches_list.value = result.body()
         }
+    }
+
+    fun get_searched_list(search_team: String)
+    {
+        var new_matches_list: ArrayList<Match> = ArrayList(MatchesList.matches_list.value)
+        for(match: Match in MatchesList.matches_list.value!!)
+        {
+            if ((match.HomeTeam != search_team) && (match.AwayTeam != search_team))
+                new_matches_list.remove(match)
+        }
+        MatchesList.matches_list.value = new_matches_list
     }
 
     object RetrofitClient
