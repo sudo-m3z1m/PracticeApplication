@@ -40,6 +40,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -119,10 +120,24 @@ class ListFragment : Fragment()
             {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center)
                 {
-                    Text(text = match.HomeTeam, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
+                    Column()
+                    {
+                        Text(text = match.HomeTeam, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
+                        Text(text = "Score: ${match.HomeTeamScore}")
+                    }
                     Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp, vertical = 40.dp), fontSize = 25.sp)
-                    Text(text = match.AwayTeam, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
+                    Column()
+                    {
+                        Text(text = match.AwayTeam, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
+                        Text(text = "Score: ${match.AwayTeamScore}")
+                    }
                 }
+                Text(text = stringResource(id = R.string.date))
+                Text(
+                    text = MatchesList.get_time(match),
+                    modifier = Modifier.padding(vertical = 10.dp),
+                    fontSize = 20.sp
+                )
             }
         }
     }

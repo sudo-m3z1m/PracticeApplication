@@ -196,7 +196,7 @@ class MatchInfoFragment : Fragment() {
                     fontSize = 35.sp,
                     modifier = Modifier.padding(horizontal = 100.dp, vertical = 10.dp),
                     color = colorResource(id = R.color.white))
-                Text(text = get_time(match),
+                Text(text = MatchesList.get_time(match),
                     fontSize = 20.sp,
                     color = colorResource(id = R.color.white))
                 HorizontalDivider(thickness = 2.dp,
@@ -210,21 +210,5 @@ class MatchInfoFragment : Fragment() {
                     modifier = Modifier.padding(vertical = 10.dp))
             }
         }
-    }
-
-    fun get_time(match: Match): String
-    {
-        val utc_date_format: String = "yyyy-MM-dd HH:mm:ss"
-        val new_date_format: String = "dd MMM yyyy HH:mm"
-
-        var date_formater = SimpleDateFormat(utc_date_format, Locale.ENGLISH) //Need to make parse to Date in match btw
-        date_formater.timeZone = TimeZone.getTimeZone("UTC")
-        val utc_date: Date = date_formater.parse(match.DateUtc)
-
-        date_formater = SimpleDateFormat(new_date_format, Locale.ENGLISH)
-        date_formater.timeZone = TimeZone.getDefault()
-        val new_date: String = date_formater.format(utc_date)
-
-        return new_date
     }
 }
