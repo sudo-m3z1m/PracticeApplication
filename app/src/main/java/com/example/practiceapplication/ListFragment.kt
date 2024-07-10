@@ -1,6 +1,7 @@
 package com.example.practiceapplication
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -11,12 +12,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -24,6 +28,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -41,6 +46,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -78,19 +85,25 @@ class ListFragment : Fragment()
     fun list_page_creating()
     {
         val matches_list = MatchesList.live_matches_list.observeAsState(emptyList())
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally)
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .background(color = colorResource(id = R.color.main_background)),
+            horizontalAlignment = Alignment.CenterHorizontally)
         {
-            Row(horizontalArrangement = Arrangement.End,
+            Row(horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 15.dp, vertical = 10.dp))
+                    .background(color = colorResource(id = R.color.secondary_background)))
             {
-                Spacer(modifier = Modifier.weight(1f))
-                Text(text = "Matches", fontSize = 24.sp, modifier = Modifier.weight(1f))
-                IconButton(onClick = {create_dialog()})
+                Spacer(modifier = Modifier.size(35.dp))
+                Text(text = "Matches", fontSize = 24.sp,
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    fontFamily = FontFamily.SansSerif,
+                    color = colorResource(id = R.color.main_text_color))
+                IconButton(onClick = {viewModel.create_dialog(requireContext())})
                 {
-                    Image(painter = painterResource(id = R.drawable.ic_launcher_background),
+                    Image(painter = painterResource(id = R.drawable.search),
                         contentDescription = "SearchButton")
                 }
             }
@@ -107,7 +120,7 @@ class ListFragment : Fragment()
 
     @Composable fun generate_match_item(match: Match)
     {
-        Surface(color = colorResource(id = R.color.teal_700),
+        Surface(color = colorResource(id = R.color.main_item_color),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 10.dp)
@@ -115,51 +128,77 @@ class ListFragment : Fragment()
             shape = RoundedCornerShape(15.dp),
             onClick = {viewModel.on_list_clicked(match, findNavController())})
         {
-            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize(),
+            Column(horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center)
             {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center)
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.padding(vertical = 15.dp))
                 {
-                    Column()
+                    Box(modifier = Modifier
+                        .width(125.dp)
+                        .height(50.dp),
+                        contentAlignment = Alignment.Center)
                     {
-                        Text(text = match.HomeTeam, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
-                        Text(text = "Score: ${match.HomeTeamScore}")
+                        Text(text = match.HomeTeam,
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center,
+                            fontFamily = FontFamily.SansSerif,
+                            color = colorResource(id = R.color.white))
                     }
-                    Text(text = "VS", modifier = Modifier.padding(horizontal = 10.dp, vertical = 40.dp), fontSize = 25.sp)
-                    Column()
+                    Image(painter = painterResource(id = R.drawable.versus),
+                        contentDescription = "VersusIcon",
+                        modifier = Modifier.size(80.dp))
+//                    Text(text = "VS",
+//                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 40.dp),
+//                        fontSize = 25.sp,
+//                        fontFamily = FontFamily.SansSerif,
+//                        color = colorResource(id = R.color.white))
+                    Box(modifier = Modifier
+                        .width(125.dp)
+                        .height(50.dp),
+                        contentAlignment = Alignment.Center)
                     {
-                        Text(text = match.AwayTeam, modifier = Modifier.padding(horizontal = 10.dp), fontSize = 20.sp)
-                        Text(text = "Score: ${match.AwayTeamScore}")
+                        Text(
+                            text = match.AwayTeam,
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center,
+                            fontFamily = FontFamily.SansSerif,
+                            color = colorResource(id = R.color.white)
+                        )
                     }
                 }
-                Text(text = stringResource(id = R.string.date))
+                Row(horizontalArrangement = Arrangement.Absolute.SpaceEvenly)
+                {
+                    Text(text = "Score: ${match.HomeTeamScore}",
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily.SansSerif,
+                        color = colorResource(id = R.color.white))
+                    Spacer(modifier = Modifier.padding(horizontal = 25.dp))
+                    Text(text = "Score: ${match.AwayTeamScore}",
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily.SansSerif,
+                        color = colorResource(id = R.color.white))
+                }
+                HorizontalDivider(thickness = 2.dp,
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
+                    color = colorResource(id = R.color.main_text_color))
+                Text(text = stringResource(id = R.string.date),
+                    fontFamily = FontFamily.SansSerif,
+                    color = colorResource(id = R.color.white))
                 Text(
                     text = MatchesList.get_time(match),
                     modifier = Modifier.padding(vertical = 10.dp),
-                    fontSize = 20.sp
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily.SansSerif,
+                    color = colorResource(id = R.color.white)
                 )
             }
         }
-    }
-
-    fun create_dialog()
-    {
-        val dialog_builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        val edit_text: EditText = EditText(requireContext())
-
-        dialog_builder.setTitle("Search")
-            .setMessage("Print team you want to search")
-            .setView(edit_text)
-            .setPositiveButton("Find", DialogInterface.OnClickListener()
-            {
-                dialogInterface, i ->
-                viewModel.get_searched_list(edit_text.text.toString())
-            })
-            .setNegativeButton("Cancel", DialogInterface.OnClickListener()
-            {
-                dialogInterface, i ->
-                viewModel.load_matches_list()
-            })
-        dialog_builder.create().show()
     }
 }

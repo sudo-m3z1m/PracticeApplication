@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="winner_label">#F4D03F</color>
     <color name="winner">#F1C40F</color>
+    <color name="main_background">#373B35</color>
+    <color name="secondary_background">#424740</color>
+    <color name="main_item_color">#27b073</color>
+    <color name="secondary_item_color">#6A8F5B</color>
+    <color name="main_text_color">#c2ffe4</color>
 </resources>

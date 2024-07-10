@@ -3,6 +3,7 @@ package com.example.practiceapplication
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.util.Log
 import android.widget.EditText
 import androidx.compose.runtime.mutableStateOf
@@ -26,7 +27,6 @@ import retrofit2.http.GET
 import java.io.StringReader
 
 class ListViewModel : ViewModel() {
-
     fun on_list_clicked(clicked_match: Match, nav_controller: NavController)
     {
         val match_index: Int = MatchesList.live_matches_list.value!!.indexOf(clicked_match)
@@ -53,6 +53,27 @@ class ListViewModel : ViewModel() {
                 new_matches_list.remove(match)
         }
         MatchesList.matches_list.value = new_matches_list
+    }
+
+    fun create_dialog(req_context: Context)
+    {
+        val dialog_builder: AlertDialog.Builder = AlertDialog.Builder(req_context)
+        val edit_text: EditText = EditText(req_context)
+
+        dialog_builder.setTitle("Search")
+            .setMessage("Print team you want to search")
+            .setView(edit_text)
+            .setPositiveButton("Find", DialogInterface.OnClickListener()
+            {
+                    dialogInterface, i ->
+                get_searched_list(edit_text.text.toString())
+            })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener()
+            {
+                    dialogInterface, i ->
+                load_matches_list()
+            })
+        dialog_builder.create().show()
     }
 
     object RetrofitClient

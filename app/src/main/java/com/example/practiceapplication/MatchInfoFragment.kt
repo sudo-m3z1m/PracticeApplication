@@ -12,6 +12,7 @@ import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
@@ -72,13 +74,16 @@ class MatchInfoFragment : Fragment() {
     @Composable
     fun paste_match_info(match: Match)
     {
-        Column(modifier = Modifier.fillMaxSize(),
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .background(color = colorResource(id = R.color.main_background)),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top)
         {
             Text(text = stringResource(id = R.string.match),
                 modifier = Modifier.padding(15.dp),
-                fontSize = 30.sp)
+                fontSize = 30.sp,
+                color = colorResource(id = R.color.main_text_color))
             paste_match_surface(match = match)
             paste_match_results(match = match)
             paste_time_info(match = match)
@@ -87,7 +92,7 @@ class MatchInfoFragment : Fragment() {
     @Composable
     fun paste_match_surface(match: Match)
     {
-        Surface(color = colorResource(id = R.color.teal_700),
+        Surface(color = colorResource(id = R.color.main_item_color),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
@@ -101,25 +106,27 @@ class MatchInfoFragment : Fragment() {
             Row(verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center)
             {
-                Text(text = match.HomeTeam,
-                    color = colorResource(id = R.color.white),
-                    fontSize = 25.sp,
-                    modifier = Modifier
-                        .width(130.dp)
-                        .padding(horizontal = 15.dp, vertical = 10.dp),
-                    textAlign = TextAlign.Center
-                )
-                Image(painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                Box() //Need to rework
+                {
+                    Text(text = match.HomeTeam,
+                        color = colorResource(id = R.color.white),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                Image(painter = painterResource(id = R.drawable.versus),
                     contentDescription = stringResource(id = R.string.match),
-                    modifier = Modifier.padding(vertical = 30.dp))
-                Text(text = match.AwayTeam,
-                    color = colorResource(id = R.color.white),
-                    fontSize = 25.sp,
                     modifier = Modifier
-                        .width(130.dp)
-                        .padding(horizontal = 15.dp, vertical = 10.dp),
-                    textAlign = TextAlign.Center
-                )
+                        .padding(vertical = 30.dp)
+                        .size(100.dp))
+                Box()
+                {
+                    Text(text = match.AwayTeam,
+                        color = colorResource(id = R.color.white),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
     }
@@ -128,7 +135,7 @@ class MatchInfoFragment : Fragment() {
     {
         val winners_map: Map<Boolean, String> = mapOf(true to match.HomeTeam, false to match.AwayTeam)
 
-        Surface(color = colorResource(id = R.color.teal_700),
+        Surface(color = colorResource(id = R.color.main_item_color),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp)
@@ -186,8 +193,8 @@ class MatchInfoFragment : Fragment() {
     @Composable
     fun paste_time_info(match: Match)
     {
-        Surface(modifier = Modifier
-            .padding(15.dp), color = colorResource(id = R.color.teal_700),
+        Surface(modifier = Modifier.padding(15.dp),
+            color = colorResource(id = R.color.main_item_color),
             shape = RoundedCornerShape(15.dp))
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally)
