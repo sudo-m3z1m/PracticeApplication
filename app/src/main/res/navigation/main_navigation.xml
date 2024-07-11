@@ -9,7 +9,7 @@
         android:id="@+id/listFragment"
         android:name="com.example.practiceapplication.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/to_info_fragment"
             app:destination="@id/matchInfoFragment"
@@ -20,14 +20,13 @@
         android:id="@+id/matchInfoFragment"
         android:name="com.example.practiceapplication.MatchInfoFragment"
         android:label="fragment_match_info"
-        tools:layout="@layout/fragment_match_info" >
+        tools:layout="@layout/fragment_match_info">
         <action
             android:id="@+id/to_list_fragment"
             app:destination="@id/listFragment"
             app:enterAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="MatchId"
+            app:argType="integer" />
     </fragment>
-    <argument
-        android:name="MatchId"
-        app:argType="integer"
-        android:defaultValue="0"/>
 </navigation>

@@ -39,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.fragment.navArgs
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -49,6 +50,7 @@ class MatchInfoFragment : Fragment() {
         fun newInstance() = MatchInfoFragment()
     }
 
+    private val args: MatchInfoFragmentArgs by navArgs()
     private val viewModel: MatchInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,35 +66,40 @@ class MatchInfoFragment : Fragment() {
         {
             setContent()
             {
-                viewModel.set_new_match(MatchesList.current_match_id)
+                viewModel.set_new_match(args.MatchId)
                 paste_match_info(viewModel.match)
             }
         }
+
         return view
     }
-    
+
     @Composable
-    fun paste_match_info(match: Match)
-    {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(color = colorResource(id = R.color.main_background)),
+    fun paste_match_info(match: Match) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = colorResource(id = R.color.main_background)),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top)
+            verticalArrangement = Arrangement.Top
+        )
         {
-            Text(text = stringResource(id = R.string.match),
+            Text(
+                text = stringResource(id = R.string.match),
                 modifier = Modifier.padding(15.dp),
                 fontSize = 30.sp,
-                color = colorResource(id = R.color.main_text_color))
+                color = colorResource(id = R.color.main_text_color)
+            )
             paste_match_surface(match = match)
             paste_match_results(match = match)
             paste_time_info(match = match)
         }
     }
+
     @Composable
-    fun paste_match_surface(match: Match)
-    {
-        Surface(color = colorResource(id = R.color.main_item_color),
+    fun paste_match_surface(match: Match) {
+        Surface(
+            color = colorResource(id = R.color.main_item_color),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
@@ -103,25 +110,39 @@ class MatchInfoFragment : Fragment() {
             shape = RoundedCornerShape(15.dp)
         )
         {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            )
             {
-                Box() //Need to rework
+                Box(modifier = Modifier
+                    .width(150.dp)
+                    .height(80.dp)
+                    .padding(horizontal = 10.dp),
+                    contentAlignment = Alignment.Center)
                 {
-                    Text(text = match.HomeTeam,
+                    Text(
+                        text = match.HomeTeam,
                         color = colorResource(id = R.color.white),
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center
                     )
                 }
-                Image(painter = painterResource(id = R.drawable.versus),
+                Image(
+                    painter = painterResource(id = R.drawable.versus),
                     contentDescription = stringResource(id = R.string.match),
                     modifier = Modifier
                         .padding(vertical = 30.dp)
-                        .size(100.dp))
-                Box()
+                        .size(100.dp)
+                )
+                Box(modifier = Modifier
+                    .width(150.dp)
+                    .height(80.dp)
+                    .padding(horizontal = 10.dp),
+                    contentAlignment = Alignment.Center)
                 {
-                    Text(text = match.AwayTeam,
+                    Text(
+                        text = match.AwayTeam,
                         color = colorResource(id = R.color.white),
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center
@@ -130,12 +151,14 @@ class MatchInfoFragment : Fragment() {
             }
         }
     }
-    @Composable
-    fun paste_match_results(match: Match)
-    {
-        val winners_map: Map<Boolean, String> = mapOf(true to match.HomeTeam, false to match.AwayTeam)
 
-        Surface(color = colorResource(id = R.color.main_item_color),
+    @Composable
+    fun paste_match_results(match: Match) {
+        val winners_map: Map<Boolean, String> =
+            mapOf(true to match.HomeTeam, false to match.AwayTeam)
+
+        Surface(
+            color = colorResource(id = R.color.main_item_color),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp)
@@ -145,76 +168,106 @@ class MatchInfoFragment : Fragment() {
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally)
             {
-                Text(text = stringResource(id = R.string.result),
+                Text(
+                    text = stringResource(id = R.string.result),
                     fontSize = 35.sp,
                     color = colorResource(id = R.color.white),
-                    modifier = Modifier.padding(5.dp))
+                    modifier = Modifier.padding(5.dp)
+                )
                 Row(horizontalArrangement = Arrangement.Center)
                 {
                     Column(horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(horizontal = 10.dp))
+                        modifier = Modifier.width(200.dp)
+                            .height(150.dp))
                     {
-                        Text(text = "${match.HomeTeam.toString()}:",
+                        Text(
+                            text = "${match.HomeTeam.toString()}:",
                             fontSize = 25.sp,
                             color = colorResource(id = R.color.white),
                             modifier = Modifier.padding(10.dp),
-                            textAlign = TextAlign.Center)
-                        Text(text = match.HomeTeamScore.toString(),
+                            textAlign = TextAlign.Center
+                        )
+                        Text(
+                            text = match.HomeTeamScore.toString(),
                             fontSize = 25.sp,
                             color = colorResource(id = R.color.white),
-                            modifier = Modifier.padding(10.dp))
+                            modifier = Modifier.padding(10.dp)
+                        )
                     }
                     Column(horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(horizontal = 10.dp))
+                        modifier = Modifier.width(200.dp)
+                            .height(150.dp))
                     {
-                        Text(text = "${match.AwayTeam.toString()}:",
+                        Text(
+                            text = "${match.AwayTeam.toString()}:",
                             fontSize = 25.sp,
                             color = colorResource(id = R.color.white),
                             modifier = Modifier.padding(10.dp),
-                            textAlign = TextAlign.Center)
-                        Text(text = match.AwayTeamScore.toString(),
+                            textAlign = TextAlign.Center
+                        )
+                        Text(
+                            text = match.AwayTeamScore.toString(),
                             fontSize = 25.sp,
                             color = colorResource(id = R.color.white),
-                            modifier = Modifier.padding(10.dp))
+                            modifier = Modifier.padding(10.dp)
+                        )
                     }
                 }
-                Text(text = stringResource(id = R.string.winner),
+                HorizontalDivider(thickness = 2.dp,
+                    modifier = Modifier.padding(horizontal = 40.dp),
+                    color = colorResource(id = R.color.winner))
+                Text(
+                    text = stringResource(id = R.string.winner),
                     fontSize = 30.sp,
-                    color = colorResource(id = R.color.winner_label),
-                    modifier = Modifier.padding(vertical = 5.dp))
-                Text(text = winners_map[match.HomeTeamScore > match.AwayTeamScore].toString(),
+                    color = colorResource(id = R.color.white),
+                    modifier = Modifier.padding(vertical = 5.dp)
+                )
+                Text(
+                    text = winners_map[match.HomeTeamScore > match.AwayTeamScore].toString(),
                     fontSize = 25.sp,
                     color = colorResource(id = R.color.winner),
-                    modifier = Modifier.padding(vertical = 5.dp))
+                    modifier = Modifier.padding(vertical = 5.dp)
+                )
             }
         }
     }
 
     @Composable
-    fun paste_time_info(match: Match)
-    {
-        Surface(modifier = Modifier.padding(15.dp),
+    fun paste_time_info(match: Match) {
+        Surface(
+            modifier = Modifier.padding(15.dp),
             color = colorResource(id = R.color.main_item_color),
-            shape = RoundedCornerShape(15.dp))
+            shape = RoundedCornerShape(15.dp)
+        )
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally)
             {
-                Text(text = stringResource(id = R.string.date),
+                Text(
+                    text = stringResource(id = R.string.date),
                     fontSize = 35.sp,
                     modifier = Modifier.padding(horizontal = 100.dp, vertical = 10.dp),
-                    color = colorResource(id = R.color.white))
-                Text(text = MatchesList.get_time(match),
+                    color = colorResource(id = R.color.white)
+                )
+                Text(
+                    text = MatchesList.get_time(match),
                     fontSize = 20.sp,
-                    color = colorResource(id = R.color.white))
-                HorizontalDivider(thickness = 2.dp,
-                    modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp))
-                Text(text = stringResource(id = R.string.location),
+                    color = colorResource(id = R.color.white)
+                )
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.location),
                     fontSize = 35.sp,
-                    color = colorResource(id = R.color.white))
-                Text(text = match.Location,
+                    color = colorResource(id = R.color.white)
+                )
+                Text(
+                    text = match.Location,
                     fontSize = 20.sp,
                     color = colorResource(id = R.color.white),
-                    modifier = Modifier.padding(vertical = 10.dp))
+                    modifier = Modifier.padding(vertical = 10.dp)
+                )
             }
         }
     }

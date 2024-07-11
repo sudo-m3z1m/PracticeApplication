@@ -10,6 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import okhttp3.Cache
+import retrofit2.Converter
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -27,8 +33,6 @@ object MatchesList
 {
     var matches_list = MutableLiveData<List<Match>>()
     var live_matches_list: LiveData<List<Match>> = matches_list
-
-    var current_match_id: Int = 0
 
     fun get_time(match: Match): String
     {

@@ -64,7 +64,7 @@ class ListFragment : Fragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.load_matches_list()
+        viewModel.load_matches_list(requireContext())
     }
 
     override fun onCreateView(
@@ -96,7 +96,11 @@ class ListFragment : Fragment()
                     .fillMaxWidth()
                     .background(color = colorResource(id = R.color.secondary_background)))
             {
-                Spacer(modifier = Modifier.size(35.dp))
+                IconButton(onClick = {viewModel.load_matches_list(requireContext())})
+                {
+                    Image(painter = painterResource(id = R.drawable.refresh),
+                        contentDescription = "RefreshButton")
+                }
                 Text(text = "Matches", fontSize = 24.sp,
                     modifier = Modifier.padding(horizontal = 10.dp),
                     fontFamily = FontFamily.SansSerif,
@@ -150,11 +154,6 @@ class ListFragment : Fragment()
                     Image(painter = painterResource(id = R.drawable.versus),
                         contentDescription = "VersusIcon",
                         modifier = Modifier.size(80.dp))
-//                    Text(text = "VS",
-//                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 40.dp),
-//                        fontSize = 25.sp,
-//                        fontFamily = FontFamily.SansSerif,
-//                        color = colorResource(id = R.color.white))
                     Box(modifier = Modifier
                         .width(125.dp)
                         .height(50.dp),
