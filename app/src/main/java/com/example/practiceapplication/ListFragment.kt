@@ -54,12 +54,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 
-class ListFragment : Fragment()
-{
-    companion object {
-        fun newInstance() = ListFragment()
-    }
-
+class ListFragment : Fragment() {
     private val viewModel: ListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,82 +77,105 @@ class ListFragment : Fragment()
     }
 
     @Composable
-    fun list_page_creating()
-    {
+    fun list_page_creating() {
         val matches_list = MatchesList.live_matches_list.observeAsState(emptyList())
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(color = colorResource(id = R.color.main_background)),
-            horizontalAlignment = Alignment.CenterHorizontally)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = colorResource(id = R.color.main_background)),
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
         {
-            Row(horizontalArrangement = Arrangement.SpaceBetween,
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(color = colorResource(id = R.color.secondary_background)))
+                    .background(color = colorResource(id = R.color.secondary_background))
+            )
             {
-                IconButton(onClick = {viewModel.load_matches_list(requireContext())})
+                IconButton(
+                    onClick = { viewModel.load_matches_list(requireContext()) },
+                    modifier = Modifier.padding(5.dp)
+                )
                 {
-                    Image(painter = painterResource(id = R.drawable.refresh),
-                        contentDescription = "RefreshButton")
+                    Image(
+                        painter = painterResource(id = R.drawable.refresh),
+                        contentDescription = "RefreshButton"
+                    )
                 }
-                Text(text = "Matches", fontSize = 24.sp,
+                Text(
+                    text = "Matches", fontSize = 24.sp,
                     modifier = Modifier.padding(horizontal = 10.dp),
                     fontFamily = FontFamily.SansSerif,
-                    color = colorResource(id = R.color.main_text_color))
-                IconButton(onClick = {viewModel.create_dialog(requireContext())})
+                    color = colorResource(id = R.color.main_text_color)
+                )
+                IconButton(onClick = { viewModel.create_dialog(requireContext()) })
                 {
-                    Image(painter = painterResource(id = R.drawable.search),
-                        contentDescription = "SearchButton")
+                    Image(
+                        painter = painterResource(id = R.drawable.search),
+                        contentDescription = "SearchButton"
+                    )
                 }
             }
             LazyColumn(horizontalAlignment = Alignment.CenterHorizontally)
             {
                 items(matches_list.value.size)
-                {
-                    index ->
+                { index ->
                     generate_match_item(matches_list.value.get(index))
                 }
             }
         }
     }
 
-    @Composable fun generate_match_item(match: Match)
-    {
+    @Composable
+    fun generate_match_item(match: Match) {
         Surface(color = colorResource(id = R.color.main_item_color),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 10.dp)
                 .shadow(5.dp, shape = RoundedCornerShape(15.dp)),
             shape = RoundedCornerShape(15.dp),
-            onClick = {viewModel.on_list_clicked(match, findNavController())})
+            onClick = { viewModel.on_list_clicked(match, findNavController()) })
         {
-            Column(horizontalAlignment = Alignment.CenterHorizontally,
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center)
+                verticalArrangement = Arrangement.Center
+            )
             {
-                Row(verticalAlignment = Alignment.CenterVertically,
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.padding(vertical = 15.dp))
+                    modifier = Modifier.padding(vertical = 15.dp)
+                )
                 {
-                    Box(modifier = Modifier
-                        .width(125.dp)
-                        .height(50.dp),
-                        contentAlignment = Alignment.Center)
+                    Box(
+                        modifier = Modifier
+                            .width(125.dp)
+                            .height(50.dp),
+                        contentAlignment = Alignment.Center
+                    )
                     {
-                        Text(text = match.HomeTeam,
+                        Text(
+                            text = match.HomeTeam,
                             fontSize = 20.sp,
                             textAlign = TextAlign.Center,
                             fontFamily = FontFamily.SansSerif,
-                            color = colorResource(id = R.color.white))
+                            color = colorResource(id = R.color.white)
+                        )
                     }
-                    Image(painter = painterResource(id = R.drawable.versus),
+                    Image(
+                        painter = painterResource(id = R.drawable.versus),
                         contentDescription = "VersusIcon",
-                        modifier = Modifier.size(80.dp))
-                    Box(modifier = Modifier
-                        .width(125.dp)
-                        .height(50.dp),
-                        contentAlignment = Alignment.Center)
+                        modifier = Modifier.size(80.dp)
+                    )
+                    Box(
+                        modifier = Modifier
+                            .width(125.dp)
+                            .height(50.dp),
+                        contentAlignment = Alignment.Center
+                    )
                     {
                         Text(
                             text = match.AwayTeam,
@@ -170,26 +188,34 @@ class ListFragment : Fragment()
                 }
                 Row(horizontalArrangement = Arrangement.Absolute.SpaceEvenly)
                 {
-                    Text(text = "Score: ${match.HomeTeamScore}",
+                    Text(
+                        text = "Score: ${match.HomeTeamScore}",
                         modifier = Modifier.padding(vertical = 10.dp),
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,
-                        color = colorResource(id = R.color.white))
+                        color = colorResource(id = R.color.white)
+                    )
                     Spacer(modifier = Modifier.padding(horizontal = 25.dp))
-                    Text(text = "Score: ${match.AwayTeamScore}",
+                    Text(
+                        text = "Score: ${match.AwayTeamScore}",
                         modifier = Modifier.padding(vertical = 10.dp),
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,
-                        color = colorResource(id = R.color.white))
+                        color = colorResource(id = R.color.white)
+                    )
                 }
-                HorizontalDivider(thickness = 2.dp,
+                HorizontalDivider(
+                    thickness = 2.dp,
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
-                    color = colorResource(id = R.color.main_text_color))
-                Text(text = stringResource(id = R.string.date),
+                    color = colorResource(id = R.color.main_text_color)
+                )
+                Text(
+                    text = stringResource(id = R.string.date),
                     fontFamily = FontFamily.SansSerif,
-                    color = colorResource(id = R.color.white))
+                    color = colorResource(id = R.color.white)
+                )
                 Text(
                     text = MatchesList.get_time(match),
                     modifier = Modifier.padding(vertical = 10.dp),

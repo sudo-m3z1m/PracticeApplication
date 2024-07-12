@@ -4,12 +4,6 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
-//buildscript {
-//    dependencies {
-//        classpath(libs.androidx.navigation.navigation.safe.args.gradle.plugin)
-//    }
-//}
-
 android {
     namespace = "com.example.practiceapplication"
     compileSdk = 34

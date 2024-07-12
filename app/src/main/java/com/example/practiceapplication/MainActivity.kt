@@ -29,17 +29,18 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-object MatchesList
-{
+object MatchesList {
     var matches_list = MutableLiveData<List<Match>>()
     var live_matches_list: LiveData<List<Match>> = matches_list
 
-    fun get_time(match: Match): String
-    {
+    fun get_time(match: Match): String {
         val utc_date_format: String = "yyyy-MM-dd HH:mm:ss"
         val new_date_format: String = "dd MMM yyyy HH:mm"
 
-        var date_formater = SimpleDateFormat(utc_date_format, Locale.ENGLISH) //Need to make parse to Date in match btw
+        var date_formater = SimpleDateFormat(
+            utc_date_format,
+            Locale.ENGLISH
+        )
         date_formater.timeZone = TimeZone.getTimeZone("UTC")
         val utc_date: Date = date_formater.parse(match.DateUtc)
 

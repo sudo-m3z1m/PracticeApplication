@@ -46,16 +46,8 @@ import java.util.Locale
 import java.util.TimeZone
 
 class MatchInfoFragment : Fragment() {
-    companion object {
-        fun newInstance() = MatchInfoFragment()
-    }
-
     private val args: MatchInfoFragmentArgs by navArgs()
     private val viewModel: MatchInfoViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -181,7 +173,7 @@ class MatchInfoFragment : Fragment() {
                             .height(150.dp))
                     {
                         Text(
-                            text = "${match.HomeTeam.toString()}:",
+                            text = "${match.HomeTeam}:",
                             fontSize = 25.sp,
                             color = colorResource(id = R.color.white),
                             modifier = Modifier.padding(10.dp),
@@ -199,7 +191,7 @@ class MatchInfoFragment : Fragment() {
                             .height(150.dp))
                     {
                         Text(
-                            text = "${match.AwayTeam.toString()}:",
+                            text = "${match.AwayTeam}:",
                             fontSize = 25.sp,
                             color = colorResource(id = R.color.white),
                             modifier = Modifier.padding(10.dp),
